@@ -55,6 +55,7 @@ input[type=text],input[type=date],input[type=time]{font:inherit;width:100%;paddi
 .em{font-size:24px;border:2px solid var(--ln);background:var(--card);border-radius:14px;padding:2px 8px}.em.on{border-color:var(--b)}
 #toast{position:fixed;left:50%;bottom:110px;transform:translateX(-50%);background:var(--fg);color:var(--bg);padding:9px 16px;border-radius:16px;font-size:14px;display:none;z-index:1000}
 .cf{position:fixed;z-index:1000;pointer-events:none;font-size:20px;animation:cf .9s ease-out forwards}@keyframes cf{to{transform:translate(var(--dx),var(--dy)) rotate(50deg);opacity:0}}
+.dk{filter:invert(1) hue-rotate(180deg) brightness(.92) contrast(.9)}
 </style></head><body data-tab="map">
 <header><div><h1>Les piliers 🍻</h1><small id="cnt">Afterworks entre potes</small></div><span class="sp"></span><span id="me"></span></header>
 <main>
@@ -91,7 +92,7 @@ function tab(n){document.body.dataset.tab=n;['map','chat','top'].forEach(k=>$('#
 /* ---- Carte ---- */
 const dark=matchMedia('(prefers-color-scheme: dark)').matches;
 const map=L.map('map',{zoomControl:false}).setView([48.8566,2.3522],13);
-L.tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/${dark?'dark_all':'voyager'}/{z}/{x}/{y}{r}.png`,{attribution:'© OpenStreetMap · © CARTO',maxZoom:19,subdomains:'abcd'}).addTo(map);
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap',maxZoom:19,className:dark?'dk':''}).addTo(map);
 const barL=L.layerGroup().addTo(map),evL=L.layerGroup().addTo(map),pplL=L.layerGroup().addTo(map),youL=L.layerGroup().addTo(map);
 map.on('click',e=>newBar('',e.latlng.lat,e.latlng.lng));
 let ovT,ovK='';
